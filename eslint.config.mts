@@ -3,13 +3,13 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import { defineConfig } from "eslint/config";
+import i18next from 'eslint-plugin-i18next';
 
 export default defineConfig([
   // Игнорируемые файлы
   {
     ignores: ["**/node_modules", "**/dist", "**/build", "**/*.config.js"]
   },
-
   // Базовые правила JavaScript
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
@@ -35,6 +35,17 @@ export default defineConfig([
 
   // React правила
   pluginReact.configs.flat.recommended,
+
+  // i18next
+  {
+    files: ["**/*.{jsx,tsx,ts,js}"],
+    plugins: {
+      i18next
+    },
+    rules: {
+      "i18next/no-literal-string": ['error', {markupOnly: true}]
+    }
+  },
 
   // Кастомные настройки для React
   {
